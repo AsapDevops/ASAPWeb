@@ -1,64 +1,56 @@
 <section>
-    <header>
-        <h2 class="text-lg font-medium text-gray-900 dark:text-gray-100">
-            {{ __('Profile Information') }}
-        </h2>
-
-        <p class="mt-1 text-sm text-gray-600 dark:text-gray-400">
-            {{ __("Update your account's profile information and email address.") }}
-        </p>
-    </header>
-
-    <form id="send-verification" method="post" action="{{ route('verification.send') }}">
-        @csrf
-    </form>
-
-    <form method="post" action="{{ route('profile.update') }}" class="mt-6 space-y-6">
-        @csrf
-        @method('patch')
-
+    <!-- Profile Card -->
+    <div class="bg-white rounded-xl shadow p-4 flex items-center gap-4 mb-6">
+        <div class="flex-1">
+            <div class="font-bold text-black text-lg">{{ $user->name }}</div>
+            <div class="text-sm text-gray-700">{{ $user->phone ?? '+254 7 ...' }}</div>
+            <div class="text-sm text-gray-700">{{ $user->email }}</div>
+        </div>
         <div>
-            <x-input-label for="name" :value="__('Name')" />
-            <x-text-input id="name" name="name" type="text" class="mt-1 block w-full" :value="old('name', $user->name)" required autofocus autocomplete="name" />
-            <x-input-error class="mt-2" :messages="$errors->get('name')" />
+            <img src="{{ $user->profile_photo_url ?? asset('mipmap-xxxhdpi/ic_launcher_round.webp') }}" alt="Profile" class="w-16 h-16 rounded-full object-cover border border-gray-200 bg-gray-100" />
         </div>
+    </div>
 
-        <div>
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" name="email" type="email" class="mt-1 block w-full" :value="old('email', $user->email)" required autocomplete="username" />
-            <x-input-error class="mt-2" :messages="$errors->get('email')" />
+    <!-- General Section -->
+    <h2 class="text-base font-bold text-gray-900 mb-2">General</h2>
+    <div class="bg-white rounded-xl shadow p-2 mb-6">
+        <a href="{{ route('profile.show') }}" class="flex items-center gap-3 py-3 border-b last:border-b-0 hover:bg-gray-50 rounded transition">
+            <svg class="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M16.862 3.487a2.25 2.25 0 0 1 3.182 3.182l-9.193 9.193-4.242 1.06 1.06-4.242 9.193-9.193z"></path></svg>
+            <span class="font-semibold text-black">Edit Profile</span>
+        </a>
+        <a href="{{ route('profile.wallet') }}" class="flex items-center gap-3 py-3 border-b last:border-b-0 hover:bg-gray-50 rounded transition">
+            <img src="{{ asset('drawable/wallet.png') }}" alt="Services" class="h-7 w-7" />
+            <span class="font-semibold text-black">Wallet</span>
+        </a>
+        <a href="{{ route('chat') }}" class="flex items-center gap-3 py-3 border-b last:border-b-0 hover:bg-gray-50 rounded transition">
+            <img src="{{ asset('drawable/chat.png') }}" alt="Chats" class="h-7 w-7" />
+            <span class="font-semibold text-black">Chats</span>
+        </a>
+        <a href="{{ route('events') }}" class="flex items-center gap-3 py-3 border-b last:border-b-0 hover:bg-gray-50 rounded transition">
+            <img src="{{ asset('drawable/calendar-check.png') }}" alt="Events" class="h-7 w-7" />
+            <span class="font-semibold text-black">Events</span>
+        </a>
+        <a href="{{ route('services') }}" class="flex items-center gap-3 py-3 border-b last:border-b-0 hover:bg-gray-50 rounded transition">
+            <img src="{{ asset('drawable/settings.png') }}" alt="Services" class="h-7 w-7" />
+            <span class="font-semibold text-black">Services</span>
+        </a>
+        <a href="#" class="flex items-center gap-3 py-3 hover:bg-gray-50 rounded transition">
+            <img src="{{ asset('drawable/advertising.png') }}" alt="Services" class="h-7 w-7" />
+            <span class="font-semibold text-black">Advertisements</span>
+        </a>
+    </div>
 
-            @if ($user instanceof \Illuminate\Contracts\Auth\MustVerifyEmail && ! $user->hasVerifiedEmail())
-                <div>
-                    <p class="text-sm mt-2 text-gray-800 dark:text-gray-200">
-                        {{ __('Your email address is unverified.') }}
-
-                        <button form="send-verification" class="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800">
-                            {{ __('Click here to re-send the verification email.') }}
-                        </button>
-                    </p>
-
-                    @if (session('status') === 'verification-link-sent')
-                        <p class="mt-2 font-medium text-sm text-green-600 dark:text-green-400">
-                            {{ __('A new verification link has been sent to your email address.') }}
-                        </p>
-                    @endif
-                </div>
-            @endif
-        </div>
-
-        <div class="flex items-center gap-4">
-            <x-primary-button>{{ __('Save') }}</x-primary-button>
-
-            @if (session('status') === 'profile-updated')
-                <p
-                    x-data="{ show: true }"
-                    x-show="show"
-                    x-transition
-                    x-init="setTimeout(() => show = false, 2000)"
-                    class="text-sm text-gray-600 dark:text-gray-400"
-                >{{ __('Saved.') }}</p>
-            @endif
-        </div>
-    </form>
+    <!-- App Section -->
+    <h2 class="text-base font-bold text-gray-900 mb-2">App</h2>
+    <div class="bg-white rounded-xl shadow p-2">
+        <a href="#" class="flex items-center gap-3 py-3 border-b last:border-b-0 hover:bg-gray-50 rounded transition">
+            <svg class="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+            <span class="font-semibold text-black">About</span>
+        </a>
+        <a href="#" class="flex items-center gap-3 py-3 hover:bg-gray-50 rounded transition">
+            <svg class="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 1 1 5.82 0c0 1.657-1.343 3-3 3s-3 1.343-3 3"/></svg>
+            <span class="font-semibold text-black">Contact Us</span>
+        </a>
+    </div>
 </section>
+

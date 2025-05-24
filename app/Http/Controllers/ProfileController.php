@@ -21,9 +21,36 @@ class ProfileController extends Controller
         ]);
     }
 
+    public function chat(Request $request): View
+    {
+        $user = $request->user();
+        return view('chat', compact('user'));
+    }
+    public function events(Request $request): View
+    {
+        $user = $request->user();
+        return view('events', compact('user'));
+    }
+    public function services(Request $request): View
+    {
+        $user = $request->user();
+        return view('services', compact('user'));
+    }
+
+    public function show(Request $request): View
+    {
+        $user = $request->user();
+        return view('profile.show', compact('user'));
+    }
+
     /**
      * Update the user's profile information.
      */
+    public function wallet(Request $request): View
+    {
+        $user = $request->user();
+        return view('profile.wallet', compact('user'));
+    }
     public function update(ProfileUpdateRequest $request): RedirectResponse
     {
         $request->user()->fill($request->validated());

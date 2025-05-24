@@ -4,17 +4,38 @@
         <div class="flex justify-between h-16">
             <div class="flex">
                 <!-- Logo -->
-                <div class="shrink-0 flex items-center">
+                <div class="shrink-0 flex items-left">
                     <a href="{{ route('dashboard') }}">
-                        <x-application-logo class="block h-9 w-auto fill-current text-gray-800 dark:text-gray-200" />
+                        <x-application-logo class="block h-9 w-auto fill-current text-gray-800 dark:text-black-200" />
                     </a>
                 </div>
 
                 <!-- Navigation Links -->
-                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                        {{ __('Dashboard') }}
-                    </x-nav-link>
+                <div class="hidden sm:flex items-center justify-center flex-2">
+                    <!-- Home -->
+                    <span class="mx-20">
+                        <a href="{{ route('dashboard') }}">
+                            <img src="{{ asset('drawable/home-agreement.png') }}" alt="Home" class="h-7 w-7" />
+                        </a>
+                    </span>
+                    <!-- Services -->
+                    <span class="mx-20">
+                        <a href="{{ route('services') }}">
+                            <img src="{{ asset('drawable/settings.png') }}" alt="Services" class="h-7 w-7" />
+                        </a>
+                    </span>
+                    <!-- Chats -->
+                    <span class="mx-20">
+                        <a href="{{ route('chat') }}">
+                        <img src="{{ asset('drawable/chat.png') }}" alt="Chats" class="h-7 w-7" />
+                        </a>
+                    </span>
+                    <!-- Events -->
+                    <span class="mx-20">
+                        <a href="{{ route('events') }}">
+                        <img src="{{ asset('drawable/calendar-check.png') }}" alt="Events" class="h-7 w-7" />
+                        </a>
+                    </span>
                 </div>
             </div>
 
@@ -73,10 +94,10 @@
         </div>
 
         <!-- Responsive Settings Options -->
-        <div class="pt-4 pb-1 border-t border-gray-200 dark:border-gray-600">
+        <div class="pt-4 pb-1 border-t border-white-200 dark:border-white-600">
             <div class="px-4">
-                <div class="font-medium text-base text-gray-800 dark:text-gray-200">{{ Auth::user()->name }}</div>
-                <div class="font-medium text-sm text-gray-500">{{ Auth::user()->email }}</div>
+                <div class="font-medium text-base text-black-800 dark:text-black-200">{{ Auth::user()->name }}</div>
+                <div class="font-medium text-sm text-black-500">{{ Auth::user()->email }}</div>
             </div>
 
             <div class="mt-3 space-y-1">
