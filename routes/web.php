@@ -19,9 +19,17 @@ Route::get('/events', function () {
     return view('events');
 })->middleware(['auth'])->name('events');
 
+Route::get('/create', function () {
+    return view('create-event');
+})->middleware(['auth'])->name('create-event');
+
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::get('/payments', function () {
+    return view('payments');
+})->name('payments');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

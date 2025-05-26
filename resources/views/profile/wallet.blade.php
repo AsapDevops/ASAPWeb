@@ -33,7 +33,7 @@
                                 </div>
                             </div>
                         </div>
-                        <span class="text-xs font-semibold text-gray-700">Deposit</span>
+                        <span class="text-xs font-semibold text-gray-700">Transact</span>
                     </div>
                     <!-- Withdraw -->
                     <div class="flex flex-col items-center flex-1">
