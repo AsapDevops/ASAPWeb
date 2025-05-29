@@ -35,5 +35,6 @@
             </main>
         </div>
         <script src="//unpkg.com/alpinejs" defer></script>
+        <script src="https://cdn.talkjs.com/talk.js"></script>
     </body>
 </html>

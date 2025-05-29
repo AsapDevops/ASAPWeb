@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ProfileUpdateRequest;
+use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -21,10 +22,10 @@ class ProfileController extends Controller
         ]);
     }
 
-    public function chat(Request $request): View
+    public function chat(): View
     {
-        $user = $request->user();
-        return view('chat', compact('user'));
+        $users = User::where('id', '!=', Auth::id())->get(['id', 'name']);
+        return view('chat', compact('users'));
     }
     public function events(Request $request): View
     {
