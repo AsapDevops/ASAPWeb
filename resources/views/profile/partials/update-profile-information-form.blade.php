@@ -34,7 +34,7 @@
             <img src="{{ asset('drawable/settings.png') }}" alt="Services" class="h-7 w-7" />
             <span class="font-semibold text-black">Services</span>
         </a>
-        <a href="#" class="flex items-center gap-3 py-3 hover:bg-gray-50 rounded transition">
+        <a href="{{ route('profile.advertisements') }}" class="flex items-center gap-3 py-3 hover:bg-gray-50 rounded transition">
             <img src="{{ asset('drawable/advertising.png') }}" alt="Services" class="h-7 w-7" />
             <span class="font-semibold text-black">Advertisements</span>
         </a>

@@ -44,14 +44,22 @@ class ProfileController extends Controller
         return view('profile.show', compact('user'));
     }
 
-    /**
-     * Update the user's profile information.
-     */
     public function wallet(Request $request): View
     {
         $user = $request->user();
         return view('profile.wallet', compact('user'));
     }
+
+    public function advertisements(Request $request): View
+    {
+        $user = $request->user();
+        return view('profile.advertisements', compact('user'));
+    }
+
+    public function store(Request $request) {
+        return redirect()->route('profile.advertisements')->with('success', 'Advertisement created successfully!');
+    }
+    
     public function update(ProfileUpdateRequest $request): RedirectResponse
     {
         $request->user()->fill($request->validated());
