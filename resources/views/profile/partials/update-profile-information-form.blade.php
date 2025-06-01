@@ -43,14 +43,56 @@
     <!-- App Section -->
     <h2 class="text-base font-bold text-gray-900 mb-2">App</h2>
     <div class="bg-white rounded-xl shadow p-2">
-        <a href="#" class="flex items-center gap-3 py-3 border-b last:border-b-0 hover:bg-gray-50 rounded transition">
-            <svg class="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
-            <span class="font-semibold text-black">About</span>
-        </a>
-        <a href="#" class="flex items-center gap-3 py-3 hover:bg-gray-50 rounded transition">
-            <svg class="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 1 1 5.82 0c0 1.657-1.343 3-3 3s-3 1.343-3 3"/></svg>
-            <span class="font-semibold text-black">Contact Us</span>
-        </a>
+        <div x-data="{ open: false }">
+            <a href="javascript:void(0);" @click="open = !open"
+               class="flex items-center gap-3 py-3 border-b last:border-b-0 hover:bg-gray-50 rounded transition">
+                <img src="{{ asset('drawable/info-button.png') }}" alt="About" class="h-7 w-7" />
+                <span class="font-semibold text-black">About</span>
+                <svg :class="{'rotate-180': open}" class="w-4 h-4 ml-auto transition-transform" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 9l-7 7-7-7"/></svg>
+            </a>
+            <div x-show="open" x-transition class="px-2 py-3 text-black" style="font-family: 'Indie Flower', cursive;">
+                <div class="text-lg font-bold mb-2">Profile</div>
+                <div>
+                    ASAP is a versatile event management and service booking platform, designed with features to connect event organizers and service providers, such as musicians, car rental services, photographers, and more.<br>
+                    It enables seamless interactions between event creators and service providers, offering functionalities such as booking, managing events, managing payments, and user communication via chat.<br>
+                    <br>
+                    <b>1. User Registration and Authentication:</b><br>
+                    ASAP supports registration for different types of users: Event Organizers, and Service Providers. During registration, users can choose their roles and input their details, such as category (for musicians), profile details, and contact information.<br>
+                    <b>2. Service and Event Management:</b><br>
+                    Event Creation: Event organizers can create events and specify the services they need, such as car rentals, sound systems, catering, and more.<br>
+                    Service Provider Integration: Service providers can register their services under categories like car rentals, photography, or sound systems. The application allows service providers to add their service details.<br>
+                    Event and Service Matching: ASAP allows event organizers to find and book service providers. Service providers can view events that match their service type, ensuring they see only relevant event opportunities.<br>
+                    <b>3. Booking and Bid Management:</b><br>
+                    Booking: Event Organizers can book service providers for their events. Once a booking is made, service providers can see the booked service package and be able to communicate with the user.<br>
+                    Bidder Management: The app checks whether a particular user is listed as a bidder, ensuring the user is notified if they are part of the event.<br>
+                    <b>4. Chat Functionality:</b><br>
+                    The app includes a chat system where users can communicate directly. Corporate users and service providers (e.g., musicians or car rental companies) can chat about event bookings and service details.<br>
+                    <b>5. Event and Booking Management:</b><br>
+                    The app displays booked events and displays event details such as date, services booked, and the current status. Users can view whether their booked events are upcoming or have already passed.<br>
+                    <b>6. Payment Management:</b><br>
+                    The app manages payments between event organizers and service providers. When a booking is made, the payment amount is deducted from the organizer’s account and held in the app until both parties confirm that the services were completed. Once the event is confirmed, the payment is released to the service provider’s account.
+                </div>
+            </div>
+        </div>
+
+        <div x-data="{ open: false }">
+            <a href="javascript:void(0);" @click="open = !open"
+               class="flex items-center gap-3 py-3 hover:bg-gray-50 rounded transition">
+                <img src="{{ asset('drawable/customer-service.png') }}" alt="Contact Us" class="h-7 w-7" />
+                <span class="font-semibold text-black">Contact Us</span>
+                <svg :class="{'rotate-180': open}" class="w-4 h-4 ml-auto transition-transform" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 9l-7 7-7-7"/></svg>
+            </a>
+            <div x-show="open" x-transition class="px-2 py-3 text-black" style="font-family: 'Indie Flower', cursive;">
+                <hr class="my-2">
+                <div class="text-red-600 mb-2" style="font-size: 1.1em;">Send Message to email below:</div>
+                <div class="flex items-center gap-2 mb-2">
+                    <img src="{{ asset('mipmap-xxxhdpi/ic_launcher_round.webp') }}" alt="Email" class="h-6 w-6" />
+                    <span class="text-black">Mwanzmziki@gmail.com</span>
+                </div>
+                <div class="mb-2">Send Message to Admin:</div>
+                <button class="bg-[#FFA800] text-black font-bold rounded-full px-6 py-2 text-lg" style="font-family: 'Indie Flower', cursive;">Message</button>
+            </div>
+        </div>
     </div>
 </section>
 

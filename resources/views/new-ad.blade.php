@@ -142,7 +142,7 @@
 
             <!-- Make Advertisement Button -->
             <div class="flex justify-center mb-8">
-                <button type="submit"
+                <button type="#"
                     class="w-full bg-[#FFA800] text-black font-bold rounded-full py-4 text-2xl"
                     style="font-family: 'Indie Flower', cursive; letter-spacing: 1px;">
                     Make Advertisement
