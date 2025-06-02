@@ -53,7 +53,7 @@
             <hr class="flex-grow border-gray-300">
         </div>
         <div class="flex gap-4 justify-center">
-            <a href="#" title="Log in with Google"
+            <a href="{{ url('google/redirect') }}" title="Log in with Google"
                 class="flex items-center justify-center w-20 h-12 border border-gray-300 bg-white rounded-lg hover:shadow transition">
                 <img src="https://auth.hostinger.com/assets/images/oauth/google.svg" alt="Google" class="h-6 w-6" />
             </a>

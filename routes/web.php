@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\SocialiteController;
+
 
 Route::get('/', function () {
     return view('welcome');
@@ -35,6 +37,11 @@ Route::get('/payments', function () {
     return view('payments');
 })->name('payments');
 
+Route::get('{provider}/redirect', [SocialiteController::class, 'redirectToProvider'])
+ ->where('provider', 'google');
+Route::get('{provider}/callback', [SocialiteController::class, 'handleProviderCallback'])
+ ->where('provider', 'google');
+
 Route::middleware('auth')->group(function () {
     Route::get('/chat', [ProfileController::class, 'chat'])->name('chat');
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -43,7 +50,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile/show', [ProfileController::class, 'show'])->name('profile.show');
     Route::get('/profile/wallet', [ProfileController::class, 'wallet'])->name('profile.wallet');
     Route::get('/profile/advertisements', [ProfileController::class, 'advertisements'])->name('profile.advertisements');
-    Route::post('/profile/advertisements', [ProfileController::class, 'index'])->name('profile.advertisements.index');
+    Route::post('/profile/advertisements', [ProfileController::class, 'store'])->name('profile.advertisements.index');
 });
 
 require __DIR__.'/auth.php';
