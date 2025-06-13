@@ -13,7 +13,7 @@
                    class="flex items-center justify-center w-20 h-12 bg-[#1877f2] rounded-lg hover:shadow transition">
                     <img src="https://auth.hostinger.com/assets/images/oauth/facebook.svg" alt="Facebook" class="h-6 w-6" />
                 </a>
-                <a href="#" title="Log in with Github"
+                <a href="{{ route('auth.redirect') }}" title="Log in with Github"
                    class="flex items-center justify-center w-20 h-12 bg-[#24292f] rounded-lg hover:shadow transition">
                     <img src="https://auth.hostinger.com/assets/images/oauth/github.svg" alt="Github" class="h-6 w-6" />
                 </a>
@@ -71,6 +71,18 @@
             <x-primary-button class="ms-4">
                 {{ __('Register') }}
             </x-primary-button>
+        </div>
+
+        <!-- User Type Radio Buttons -->
+        <div class="flex flex-col items-center mt-6">
+            <label class="flex items-center mb-2">
+                <input type="radio" name="user_type" value="organizer" class="form-radio text-indigo-600" required />
+                <span class="ml-2 text-gray-700">Organizer</span>
+            </label>
+            <label class="flex items-center">
+                <input type="radio" name="user_type" value="client" class="form-radio text-indigo-600" required />
+                <span class="ml-2 text-gray-700">Client</span>
+            </label>
         </div>
     </form>
 </x-guest-layout>

@@ -51,4 +51,26 @@ class SocialiteController extends Controller
         Auth::login($user, true);
         return redirect('/dashboard');
     }
+
+    public function redirect()
+    {
+        return Socialite::driver('github')->redirect();
+    }
+    public function callback()
+    {
+        $githubUser = Socialite::driver('github')->user();
+
+        // If the user doesn't exist create, else update the existing one
+        $user = User::updateOrCreate([
+            'email' => $githubUser->getEmail(),
+        ], [
+            'provider_id' => $githubUser->getId(),
+            'name' => $githubUser->getName() ?? $githubUser->getNickname(),
+            'token' => $githubUser->token,
+        ]);
+
+        Auth::login($user);
+
+        return redirect('/dashboard');
+    }
 }

@@ -37,10 +37,13 @@ Route::get('/payments', function () {
     return view('payments');
 })->name('payments');
 
-Route::get('{provider}/redirect', [SocialiteController::class, 'redirectToProvider'])
- ->where('provider', 'google');
-Route::get('{provider}/callback', [SocialiteController::class, 'handleProviderCallback'])
- ->where('provider', 'google');
+Route::get('/auth/redirect', [SocialiteController::class, 'redirect'])->name('auth.redirect');
+Route::get('/auth/callback', [SocialiteController::class, 'callback']);
+
+Route::get('/{provider}/redirect', [SocialiteController::class, 'redirectToProvider'])
+    ->where('provider', 'github|google');
+Route::get('/{provider}/callback', [SocialiteController::class, 'handleProviderCallback'])
+    ->where('provider', 'github|google');
 
 Route::middleware('auth')->group(function () {
     Route::get('/chat', [ProfileController::class, 'chat'])->name('chat');
