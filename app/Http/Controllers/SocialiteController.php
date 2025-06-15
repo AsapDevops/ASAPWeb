@@ -5,26 +5,25 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Str;
 use Laravel\Socialite\Facades\Socialite;
 
 class SocialiteController extends Controller
 {
     public function redirectToProvider(Request $request, $provider)
     {
-        $scheme = $request->getScheme();
+        // Set dynamic redirect URL based on current domain
         $domain = $request->getHttpHost();
-        config(['services.' . $provider . '.redirect' => "{$scheme}://{$domain}/{$provider}/callback"]);
+        config(['services.' . $provider . '.redirect' => "https://{$domain}/{$provider}/callback"]);
         return Socialite::driver($provider)->redirect();
     }
-
     public function handleProviderCallback(Request $request, $provider)
     {
         try {
-            $scheme = $request->getScheme();
+            // Set dynamic redirect URL for callback
             $domain = $request->getHttpHost();
-            config(['services.' . $provider . '.redirect' => "{$scheme}://{$domain}/{$provider}/callback"]);
+            config(['services.' . $provider . '.redirect' => "https://{$domain}/{$provider}/callback"]);
+
+            // Attempt to get the user information from Socialite
             $socialiteUser = Socialite::driver($provider)->stateless()->user();
         } catch (\Exception $e) {
             return redirect()->route('login')
@@ -39,8 +38,7 @@ class SocialiteController extends Controller
                 'email' => $socialiteUser->email,
                 'provider' => $provider,
                 'provider_id' => $socialiteUser->id,
-                'registration_domain' => $domain,
-                'password' => Hash::make(Str::random(24)), // <-- Add this line
+                'registration_domain' => $domain
             ]);
 
             $user->sendEmailVerificationNotification();
@@ -49,28 +47,6 @@ class SocialiteController extends Controller
                 ->withErrors([400, 'User creation is disabled in the staging environment.']);
         }
         Auth::login($user, true);
-        return redirect('/dashboard');
-    }
-
-    public function redirect()
-    {
-        return Socialite::driver('github')->redirect();
-    }
-    public function callback()
-    {
-        $githubUser = Socialite::driver('github')->user();
-
-        // If the user doesn't exist create, else update the existing one
-        $user = User::updateOrCreate([
-            'email' => $githubUser->getEmail(),
-        ], [
-            'provider_id' => $githubUser->getId(),
-            'name' => $githubUser->getName() ?? $githubUser->getNickname(),
-            'token' => $githubUser->token,
-        ]);
-
-        Auth::login($user);
-
         return redirect('/dashboard');
     }
 }

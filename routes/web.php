@@ -37,13 +37,9 @@ Route::get('/payments', function () {
     return view('payments');
 })->name('payments');
 
-Route::get('/auth/redirect', [SocialiteController::class, 'redirect'])->name('auth.redirect');
-Route::get('/auth/callback', [SocialiteController::class, 'callback']);
-
-Route::get('/{provider}/redirect', [SocialiteController::class, 'redirectToProvider'])
-    ->where('provider', 'github|google');
-Route::get('/{provider}/callback', [SocialiteController::class, 'handleProviderCallback'])
-    ->where('provider', 'github|google');
+Route::get('/{provider}/redirect', [SocialiteController::class, 'redirectToProvider']);
+Route::get('{provider}/callback', [SocialiteController::class, 'handleProviderCallback'])
+    ->where('provider', 'google');
 
 Route::middleware('auth')->group(function () {
     Route::get('/chat', [ProfileController::class, 'chat'])->name('chat');
@@ -56,4 +52,4 @@ Route::middleware('auth')->group(function () {
     Route::post('/profile/advertisements', [ProfileController::class, 'store'])->name('profile.advertisements.index');
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
