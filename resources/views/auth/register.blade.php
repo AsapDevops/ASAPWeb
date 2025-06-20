@@ -1,22 +1,20 @@
 <x-guest-layout>
     <form method="POST" action="{{ route('register') }}">
         @csrf
+        <input type="hidden" name="type" value="{{ $type ?? 'client' }}">
 
         <!-- Social Logins -->
         <div class="flex flex-col items-center mb-6">
             <div class="flex gap-4 w-full justify-center">
                 <a href="{{ url('google/redirect') }}" title="Log in with Google"
-                   class="flex items-center justify-center w-20 h-12 border border-gray-300 bg-white rounded-lg hover:shadow transition">
+                    class="flex items-center justify-center w-20 h-12 border border-gray-300 bg-white rounded-lg hover:shadow transition">
                     <img src="https://auth.hostinger.com/assets/images/oauth/google.svg" alt="Google" class="h-6 w-6" />
                 </a>
                 <a href="#" title="Log in with Facebook"
-                   class="flex items-center justify-center w-20 h-12 bg-[#1877f2] rounded-lg hover:shadow transition">
+                    class="flex items-center justify-center w-20 h-12 bg-[#1877f2] rounded-lg hover:shadow transition">
                     <img src="https://auth.hostinger.com/assets/images/oauth/facebook.svg" alt="Facebook" class="h-6 w-6" />
                 </a>
-                <a href="#" title="Log in with Github"
-                   class="flex items-center justify-center w-20 h-12 bg-[#24292f] rounded-lg hover:shadow transition">
-                    <img src="https://auth.hostinger.com/assets/images/oauth/github.svg" alt="Github" class="h-6 w-6" />
-                </a>
+            
             </div>
             <div class="flex items-center w-full mt-6">
                 <hr class="flex-grow border-gray-300">
@@ -71,18 +69,6 @@
             <x-primary-button class="ms-4">
                 {{ __('Register') }}
             </x-primary-button>
-        </div>
-
-        <!-- User Type Radio Buttons -->
-        <div class="flex flex-col items-center mt-6">
-            <label class="flex items-center mb-2">
-                <input type="radio" name="user_type" value="organizer" class="form-radio text-indigo-600" required />
-                <span class="ml-2 text-gray-700">Organizer</span>
-            </label>
-            <label class="flex items-center">
-                <input type="radio" name="user_type" value="client" class="form-radio text-indigo-600" required />
-                <span class="ml-2 text-gray-700">Client</span>
-            </label>
         </div>
     </form>
 </x-guest-layout>

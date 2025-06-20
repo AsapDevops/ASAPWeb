@@ -957,7 +957,7 @@
         function fadeOutRedirect(event, url) {
             event.preventDefault();
             const wrapper = document.getElementById('fade-wrapper');
-            if(wrapper) {
+            if (wrapper) {
                 wrapper.classList.add("active");
             }
             setTimeout(() => {
@@ -989,7 +989,7 @@
 
                         @if (Route::has('register'))
                         <a
-                            href="{{ route('register') }}"
+                            href="#"
                             onclick="fadeOutRedirect(event, '{{ route('register') }}')"
                             class="rounded-md px-3 py-3 dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white">
                             <span id="heartbeat-wrapper" class="inline-block">
@@ -1013,12 +1013,24 @@
                     @endif
                 </header>
 
-                <main class="flex flex-col items-center justify-center gap-6 px-3 py-2 lg:flex-row lg:gap-8">
-                    <div class="flex lg:justify-center lg:col-start-2">
-
+                <main class="flex flex-col items-center justify-center gap-6 px-3 py-2 lg:flex-row lg:gap-9">
+                    <div class="flex flex-col items-center gap-4 w-full">
+                        <!-- User Type Buttons -->
+                        <div class="flex gap-4 mb-5">
+                            <a href="{{ route('register', ['type' => 'client']) }}"
+                                onclick="fadeOutRedirect(event, '{{ route('register', ['type' => 'client']) }}')"
+                                class="rounded-md px-6 py-2 bg-white text-black font-semibold shadow-[0px_4px_34px_rgba(0,0,0,0.08)] hover:bg-yellow-200 transition duration-300">
+                                Client
+                            </a>
+                            <a href="{{ route('register', ['type' => 'organizer']) }}"
+                                onclick="fadeOutRedirect(event, '{{ route('register', ['type' => 'organizer']) }}')"
+                                class="rounded-md px-6 py-2 bg-white text-black font-semibold shadow-[0px_4px_34px_rgba(0,0,0,0.08)] hover:bg-yellow-200 transition duration-300">
+                                Organizer
+                            </a>
+                        </div>  
+                        <!-- Logo -->
+                        <!-- <img class="h-16 w-auto rounded-full zoom-in" src="drawable\logos.jpeg" alt="Logo"> -->
                     </div>
-                    <img class="hidden h-40 w-auto rounded-lg drop-shadow-[0px_4px_34px_rgba(0,0,0,0.25)] lg:block"
-                        src="drawable\logos.jpeg" alt="Logo" />
                 </main>
             </div>
         </div>

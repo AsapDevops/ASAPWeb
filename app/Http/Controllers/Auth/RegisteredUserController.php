@@ -17,9 +17,10 @@ class RegisteredUserController extends Controller
     /**
      * Display the registration view.
      */
-    public function create(): View
+    public function create(Request $request)
     {
-        return view('auth.register');
+        $type = $request->query('type', 'client'); // default to client
+        return view('auth.register', compact('type'));
     }
 
     /**
@@ -33,18 +34,25 @@ class RegisteredUserController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            'type' => ['required', 'in:organizer,client'],
         ]);
+
+        $type = $request->input('type', 'client');
 
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
+            'type' => $type, // Only one type field
         ]);
 
         event(new Registered($user));
-
         Auth::login($user);
 
-        return redirect(route('dashboard', absolute: false));
+        if ($type === 'organizer') {
+            return redirect()->route('profile.organizer');
+        } else {
+            return redirect()->route('profile.client');
+        }
     }
 }

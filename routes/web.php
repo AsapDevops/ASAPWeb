@@ -1,8 +1,11 @@
 <?php
 
+use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SocialiteController;
+use App\Http\Controllers\OrganizerController;
+use App\Http\Controllers\ClientController;
 
 
 Route::get('/', function () {
@@ -50,6 +53,19 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile/wallet', [ProfileController::class, 'wallet'])->name('profile.wallet');
     Route::get('/profile/advertisements', [ProfileController::class, 'advertisements'])->name('profile.advertisements');
     Route::post('/profile/advertisements', [ProfileController::class, 'store'])->name('profile.advertisements.index');
+});
+
+Route::get('/register', [RegisteredUserController::class, 'create'])->name('register');
+Route::post('/register', [RegisteredUserController::class, 'store']);
+
+Route::middleware(['auth', 'verified'])->group(function () {
+    Route::get('/profile/organizer', function () {
+        return view('profile.partials.update-profile-information-form');
+    })->name('profile.organizer');
+
+    Route::get('/profile/client', function () {
+        return view('profile.partials.update-profile-info-client');
+    })->name('profile.client');
 });
 
 require __DIR__ . '/auth.php';

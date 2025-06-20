@@ -22,6 +22,7 @@ return new class extends Migration
             $table->text('refresh_token')->nullable();
             $table->integer('expires_in')->nullable();
             $table->rememberToken();
+            $table->string('type')->default('client');
             $table->timestamps();
         });
 

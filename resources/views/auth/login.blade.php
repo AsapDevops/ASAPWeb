@@ -58,11 +58,6 @@
                 <img src="https://auth.hostinger.com/assets/images/oauth/google.svg" alt="Google" class="h-6 w-6" />
             </a>
             </a>
-            <a href="#" title="Log in with Github"
-                class="flex items-center justify-center w-20 h-12 bg-[#24292f] rounded-lg hover:shadow transition">
-                <img src="https://auth.hostinger.com/assets/images/oauth/github.svg" alt="Github" class="h-6 w-6" />
-            </a>
         </div>
-
     </div>
 </x-guest-layout>
