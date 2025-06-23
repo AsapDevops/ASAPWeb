@@ -13,15 +13,16 @@ class SocialiteController extends Controller
     {
         // Set dynamic redirect URL based on current domain
         $domain = $request->getHttpHost();
-        config(['services.' . $provider . '.redirect' => "https://{$domain}/{$provider}/callback"]);
+        config(['services.' . $provider . '.redirect' => "http://{$domain}/{$provider}/callback"]);
         return Socialite::driver($provider)->redirect();
     }
+
     public function handleProviderCallback(Request $request, $provider)
     {
         try {
             // Set dynamic redirect URL for callback
             $domain = $request->getHttpHost();
-            config(['services.' . $provider . '.redirect' => "https://{$domain}/{$provider}/callback"]);
+            config(['services.' . $provider . '.redirect' => "http://{$domain}/{$provider}/callback"]);
 
             // Attempt to get the user information from Socialite
             $socialiteUser = Socialite::driver($provider)->stateless()->user();
@@ -29,8 +30,10 @@ class SocialiteController extends Controller
             return redirect()->route('login')
                 ->with('error', 'An error occurred during social login. Please try again.');
         }
+
         $user = User::where('email', $socialiteUser->email)->first();
         $domain = $request->header('host');
+
         // Disable user creation in staging environment
         if (!$user && config('app.env') !== 'staging') {
             $user = User::create([
@@ -46,6 +49,7 @@ class SocialiteController extends Controller
             return redirect()->route('login')
                 ->withErrors([400, 'User creation is disabled in the staging environment.']);
         }
+
         Auth::login($user, true);
         return redirect('/dashboard');
     }

@@ -10,7 +10,7 @@
                     class="flex items-center justify-center w-20 h-12 border border-gray-300 bg-white rounded-lg hover:shadow transition">
                     <img src="https://auth.hostinger.com/assets/images/oauth/google.svg" alt="Google" class="h-6 w-6" />
                 </a>
-                <a href="#" title="Log in with Facebook"
+                <a href="{{ url('facebook/redirect') }}" title="Log in with Facebook"
                     class="flex items-center justify-center w-20 h-12 bg-[#1877f2] rounded-lg hover:shadow transition">
                     <img src="https://auth.hostinger.com/assets/images/oauth/facebook.svg" alt="Facebook" class="h-6 w-6" />
                 </a>

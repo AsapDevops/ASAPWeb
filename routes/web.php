@@ -44,6 +44,10 @@ Route::get('/{provider}/redirect', [SocialiteController::class, 'redirectToProvi
 Route::get('{provider}/callback', [SocialiteController::class, 'handleProviderCallback'])
     ->where('provider', 'google');
 
+Route::get('facebook/redirect', [SocialiteController::class, 'redirectToProvider']);
+Route::get('facebook/callback', [SocialiteController::class, 'handleProviderCallback'])
+    ->where('provider', 'facebook');
+
 Route::middleware('auth')->group(function () {
     Route::get('/chat', [ProfileController::class, 'chat'])->name('chat');
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
