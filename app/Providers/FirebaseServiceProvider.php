@@ -16,7 +16,9 @@ class FirebaseServiceProvider extends ServiceProvider
     {
         $this->app->singleton('firebase',  
 function ($app) {
-            return (new Factory)->withServiceAccount(config('firebase.credentials.path'))->create();
+            return (new Factory)
+    ->withServiceAccount(config('firebase.credentials.path'))
+    ->createDatabase();
         });
     }
 
